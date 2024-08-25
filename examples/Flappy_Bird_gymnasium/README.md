@@ -1,7 +1,12 @@
 
 # Flappy Bird RL example using [Gymnasium](https://gymnasium.farama.org)
 
-This directory contains a simple example of Reinforcement Learning (RL) to train an AI model to learn to play the Flappy Bird game. It uses the popular [Gymnasium](https://gymnasium.farama.org) framework. The example is purposely kept very minimal to hopefully distill it down to the essential features.
+This directory contains a simple example of Reinforcement Learning (RL) to train an AI model to learn to play the Flappy Bird game. It uses the popular [Gymnasium](https://gymnasium.farama.org) framework. The example is purposely kept very minimal to hopefully distill it down to only the essential features.
+
+<div style="text-align: center;">
+  <img src="../../doc/flappy_bird_ai.gif" alt="AI playing Flappy Bird" style="border: 2px solid yellow;">
+</div>
+
 
 This example uses [pygame](https://www.pygame.org/docs/) which can be run locally to open a window for the graphics and accept user input (spacebar). It consists of four python scripts:
 
@@ -31,6 +36,8 @@ pip install pygame gymnasium tensorflow stable_baselines3
 
 ## Playing the game
 
+The game has only one control, the spacebar, which "flaps" when pressed. This boosts the y-velocity of the player (red dot). Just navigate through the obstacles without hitting them for as long as possible.
+
 ~~~bash
 python3 flappy_game.py
 ~~~
@@ -45,9 +52,35 @@ Run the training script like this:
 python3 flappy_RL_train.py
 ~~~
 
+You will see it print many tables like the following during training. The first value, `ep_len_mean` gives the mean number of time steps achieved for the most recent batch of episodes. A value near 75 means it is hitting the first obstacle. This value will gradually grow (with some oscillation) after it learns to navigate past the first obstacle.
+
+```
+-------------------------------------------
+| rollout/                |               |
+|    ep_len_mean          | 632           |
+|    ep_rew_mean          | 3.83e+05      |
+| time/                   |               |
+|    fps                  | 2270          |
+|    iterations           | 932           |
+|    time_elapsed         | 840           |
+|    total_timesteps      | 1908736       |
+| train/                  |               |
+|    approx_kl            | 0.00082816853 |
+|    clip_fraction        | 0.0108        |
+|    clip_range           | 0.2           |
+|    entropy_loss         | -0.215        |
+|    explained_variance   | 1.79e-07      |
+|    learning_rate        | 0.0003        |
+|    loss                 | 1.51e+08      |
+|    n_updates            | 9310          |
+|    policy_gradient_loss | -0.00086      |
+|    value_loss           | 3.72e+08      |
+-------------------------------------------
+```
+
 Because it is randomly sampling the action space as the game presents it with various points in the observation space, it may not find a workable solution in the first 200k time steps. In other words, you may run it multiple times without it learning anything. Once it finds how to reliably pass the first obstacle though, it will start learning quickly. You may wish to change the number `total_timesteps` to something larger in order to ensure that the model finds a useful solution, or trains to a better one.
 
-Note that every time you run the training script it starts from scratch, forgetting anything about earlier training and overwriting the model.
+Note that every time you run the training script it starts from scratch, forgetting anything about earlier training and overwriting the model!
 
 ## Testing the RL model
 
