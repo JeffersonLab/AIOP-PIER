@@ -3,9 +3,10 @@
 
 This directory contains a simple example of Reinforcement Learning (RL) to train an AI model to learn to play the Flappy Bird game. It uses the popular [Gymnasium](https://gymnasium.farama.org) framework. The example is purposely kept very minimal to hopefully distill it down to only the essential features.
 
-<div style="text-align: center;">
+
+<p align="center">
   <img src="../../doc/flappy_bird_ai.gif" alt="AI playing Flappy Bird" style="border: 2px solid yellow;">
-</div>
+</p>
 
 
 This example uses [pygame](https://www.pygame.org/docs/) which can be run locally to open a window for the graphics and accept user input (spacebar). It consists of four python scripts:
