@@ -4,7 +4,7 @@
 # flappy_game.py.
 #
 # This will train the model for a minimum number of time frames
-# and then save the model to a keras model file. Run it like this:
+# and then save the model to a model file. Run it like this:
 #
 #   python3 flappy_RL_train.py
 #
@@ -16,17 +16,14 @@
 # not unusual for it not to find a solution which gets it past
 # the first obstacle when you run this. If the value of ep_len_mean
 # is not greater than 100 at the end of training, just try running
-# it again.
+# it again. Alternatively change the value of total_timesteps.
 #--------------------------------------------------------------------
 
 import flappy_env as env
-
 from stable_baselines3 import PPO
-from stable_baselines3.common.env_util import make_vec_env
-import gymnasium as gym
 
 # Create the environment
-env = make_vec_env(lambda: env.FlappyEnv(render_mode="human"), n_envs=1)
+flappyenv = env.FlappyEnv(render_mode="human")
 
 # Define the policy architecture
 policy_kwargs = dict(
@@ -34,12 +31,12 @@ policy_kwargs = dict(
 )
 
 # Create the PPO model
-model = PPO("MlpPolicy", env, policy_kwargs=policy_kwargs, verbose=1)
+model = PPO("MlpPolicy", flappyenv, policy_kwargs=policy_kwargs, learning_rate=2e-4, verbose=1)
 
 # Train the model
-model.learn(total_timesteps=200000)
+model.learn(total_timesteps=500000)
 
-# Save the trained model
-model_name = "flappy_bird_rl_model.keras"
-model.save(model_name)
-print(f"model saved to: {model_name}")
+# Save the fully trained PPO model (actor, critic, action)
+model_name_ppo = "flappy_bird_rl_model.ppo"
+model.save(model_name_ppo)
+print(f"PPO model saved to: {model_name_ppo}")

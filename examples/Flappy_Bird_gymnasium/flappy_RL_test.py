@@ -1,10 +1,11 @@
 #--------------------------------------------------------------------
 # This script is used to have the trained model play the 
 # flappy bird game. It assumes the trained model already
-# exists in the file "flappy_bird_rl_model.keras".
+# exists in the file:
+#      "flappy_bird_rl_model.ppo".
 #
 # The flappy_env.py and flappy_game.py files need to be in
-# the same directory or in you PYTHONPATH for this to work.
+# the same directory or in your PYTHONPATH for this to work.
 #
 # Run it like this:
 #
@@ -13,25 +14,23 @@
 #--------------------------------------------------------------------
 
 import flappy_env as env
-
 from stable_baselines3 import PPO
-from stable_baselines3.common.env_util import make_vec_env
-import gymnasium as gym
-
-# Create the environment
-flappyenv = env.FlappyEnv(render_mode="human")
 
 # Load the model
-model_name = "flappy_bird_rl_model.keras"
-model = PPO.load(model_name)
-print(f"model loaded from: {model_name}")
+model = PPO.load("flappy_bird_rl_model.ppo")
 
-# Test the trained model
+# Create the environment for playing the game
+flappyenv = env.FlappyEnv(render_mode="human")
+
+# Play the game
 obs, _ = flappyenv.reset()
 while True:
-    action, _ = model.predict(obs)
+    # Use model to decide whether to flap or not
+    action, _ = model.predict(obs, deterministic=True)
+    
+    # Go to next time step and render frame
     obs, rewards, terminated, truncated, infos = flappyenv.step(action)
     flappyenv.render()
     if terminated or truncated: break
 
-print(f"Total time steps: {flappyenv.steps_without_collision}")
+print(f"Total time steps: {flappyenv.game.score}")

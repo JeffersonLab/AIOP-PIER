@@ -3,9 +3,7 @@
 #
 # It is kept minimal for the purposes of illustration.
 # It is designed to be used with an RL learning environment.
-# To use this in an RL environment, you'll need to copy much
-# of the run_game method (the part inside the while loop)
-# into the step method of your environment.
+# (see flappy_env.py and flappy_RL_train.py)
 #
 # The game can be played by a human (using the spacebar) by running:
 #
@@ -57,8 +55,7 @@ class Player:
         self.y = max(0, min(GRID_HEIGHT - PLAYER_SIZE, self.y))
         
         # If player is at edge of screen then set velocity to 0
-        if self.y>=(GRID_HEIGHT - PLAYER_SIZE):
-            self.velocity = 0
+        if self.y>=(GRID_HEIGHT - PLAYER_SIZE): self.velocity = 0
 
     def draw(self, screen):
         pygame.draw.rect(screen, PLAYER_COLOR, (PLAYER_X * BLOCK_SIZE, int(self.y) * BLOCK_SIZE, PLAYER_SIZE * BLOCK_SIZE, PLAYER_SIZE * BLOCK_SIZE))
@@ -142,9 +139,9 @@ class FlappyGame:
                 self.obstacles.remove(obstacle)
 
             if obstacle.x + OBSTACLE_WIDTH < PLAYER_X and not obstacle.passed:
-                self.score += 1
                 obstacle.passed = True
 
+        if not collision: self.score += 1
         return collision
 
     def run_game(self):
@@ -169,3 +166,4 @@ if __name__ == "__main__":
 
     game = FlappyGame()
     game.run_game()
+    print(f"Final score: {game.score}")
