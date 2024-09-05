@@ -264,19 +264,23 @@ async function createFlappyGame() {
 }
 
 // Initialize and start the game
-// const game = new FlappyGame();
-document.addEventListener('keydown', (event) => {
-    if (event.code === 'Enter') {
-        if (game.gameOver) {
-            game.reset();
-            game.runGame();
-        }
-    }
-});
-
 createFlappyGame().then((game) => {
-    console.log("Game initialized and models loaded!");
-    game.runGame();
+    if( game != null ){
+        console.log("Game initialized and models loaded!");
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Enter') {
+                if (game.gameOver) {
+                    game.reset();
+                    game.runGame();
+                }
+            }
+        });
+        
+        game.runGame();
+    }else{
+        console.log("Game initialization failed!");
+    }
 });
 
 
