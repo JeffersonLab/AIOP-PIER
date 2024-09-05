@@ -32,7 +32,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 
-pip install pygame gymnasium tensorflow stable_baselines3
+pip install pygame gymnasium stable_baselines3 onnx onnxruntime
 ~~~
 
 ## Playing the game
