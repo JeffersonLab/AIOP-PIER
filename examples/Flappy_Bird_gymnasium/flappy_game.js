@@ -108,7 +108,7 @@ class FlappyGame {
         this.ctx.font = "30px Arial";
         this.ctx.fillText("Game Over", SCREEN_WIDTH/3, SCREEN_HEIGHT / 2);
         this.ctx.font = "20px Arial";
-        this.ctx.fillText("Press Space to Restart", SCREEN_WIDTH/3 - 30, SCREEN_HEIGHT / 2 + 30);
+        this.ctx.fillText("Press Enter to Restart", SCREEN_WIDTH/3 - 30, SCREEN_HEIGHT / 2 + 30);
     }
 
     renderFrame() {
@@ -139,8 +139,6 @@ class FlappyGame {
 
             if (obstacle.checkCollision(this.player)) {
                 collision = true;
-            }else{
-                this.score++;
             }
 
             if (obstacle.isOffScreen()) {
@@ -151,6 +149,8 @@ class FlappyGame {
                 obstacle.passed = true;
             }
         }
+
+        if(!collision) this.score++;
 
         return collision;
     }
@@ -180,13 +180,13 @@ class FlappyGame {
 // Initialize and start the game
 const game = new FlappyGame();
 document.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') {
+    if (event.code === 'Enter') {
         if (game.gameOver) {
             game.reset();
             game.runGame();
-        } else {
-            game.flap = true;
         }
+    }else if (event.code === 'Space') {
+        game.flap = true;
     }
 });
 game.runGame();
