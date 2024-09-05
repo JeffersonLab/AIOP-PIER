@@ -112,8 +112,8 @@ class FlappyGame {
     async loadModel() {
         try {
             // Initialize inference sessions for the policy and action models
-            this.ort_session_policy = await loadModelFromBase64(policyModelBase64);
-            this.ort_session_action = await loadModelFromBase64(actionModelBase64);
+            this.ort_session_policy = await this.loadModelFromBase64(policyModelBase64);
+            this.ort_session_action = await this.loadModelFromBase64(actionModelBase64);
     
             // If the model loads successfully, print a success message
             console.log("ONNX models loaded successfully.");
