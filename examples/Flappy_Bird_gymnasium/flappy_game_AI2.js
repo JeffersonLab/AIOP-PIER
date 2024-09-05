@@ -91,7 +91,8 @@ class FlappyGame {
     constructor() {
         this.canvas = document.getElementById('flappyCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.ort_session = null;
+        this.ort_session_policy = null;
+        this.ort_session_action = null;
         this.loadModel();  // Load the model asynchronously
         this.reset();
     }
@@ -255,8 +256,15 @@ class FlappyGame {
     };
 }
 
+// Factory function to create and initialize the game instance
+async function createFlappyGame() {
+    const game = new FlappyGame();
+    await game.loadModel();  // Wait for models to load before returning the game instance
+    return game;
+}
+
 // Initialize and start the game
-const game = new FlappyGame();
+// const game = new FlappyGame();
 document.addEventListener('keydown', (event) => {
     if (event.code === 'Enter') {
         if (game.gameOver) {
@@ -265,5 +273,10 @@ document.addEventListener('keydown', (event) => {
         }
     }
 });
-game.runGame();
+
+createFlappyGame().then((game) => {
+    console.log("Game initialized and models loaded!");
+    game.runGame();
+});
+
 
