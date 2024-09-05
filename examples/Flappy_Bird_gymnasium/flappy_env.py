@@ -23,8 +23,6 @@ class FlappyEnv(gym.Env):
     
     def __init__(self, render_mode=None):
 
-        # self.render_mode = render_mode
-
         # Action space
         self.action_space = gym.spaces.Discrete(2) # 0=no flap  1=flap
         
