@@ -33,17 +33,16 @@ Two other, optional scripts can be used to export the model into [ONNX](https://
 
 ### Installation
 
-To use this, grab the code and then set up a python vitural environment with the necessary dependencies:
+To use this, set up a python vitural environment with the necessary dependencies and then grab the code:
 
 ~~~bash
-git clone https://github.com/JeffersonLab/AIOP-PIER
-cd AIOP-PIER/examples/Flappy_Bird_gymnasium
-
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-
 pip install pygame gymnasium stable_baselines3 onnx onnxruntime
+
+git clone https://github.com/JeffersonLab/AIOP-PIER
+cd AIOP-PIER/examples/Flappy_Bird_gymnasium
 ~~~
 
 ### Playing the game
@@ -57,6 +56,16 @@ python3 flappy_game.py
 ### Training an RL model
 
 Use the `flappy_RL_train.py` script to train and save a model. The script is set to train for up to 200,000 time steps. This is culumlative over many games. The first obstacle will collide with the player at 75 time steps so many games will be "played" during the first part of the learning process in these 200k steps.
+
+#### Observstion and Action Space
+As noted above, the action space in this example is discrete with only two possible actions: *flap* or *no-flap*. (OK, so *no-flap* is really not an action and is more of a non-action, but you get it.)
+
+The observation space is just 3 values:
+- y-difference between play and gap of next obstacle. Negative values when the player is higher than the gap, positive values when it is lower, and zero when it is lined up with the gap.
+- y-velocity of player
+- x-position of next obstacle
+
+Note that only the next obstacle is considered of importance here. 
 
 Run the training script like this:
 
