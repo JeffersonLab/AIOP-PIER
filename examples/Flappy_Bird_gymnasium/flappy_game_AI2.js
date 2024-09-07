@@ -1,4 +1,4 @@
-// Same as flappy_game_AI.js except this assumes policyModelBase64 and actionModelBase64
+// This assumes policyModelBase64 and actionModelBase64
 // are already defined and contain base64 representation of the model onnx files.
 const canvas = document.getElementById("flappyCanvas");
 const ctx = canvas.getContext("2d");
