@@ -31,7 +31,7 @@ policy_kwargs = dict(
 )
 
 # Create the PPO model
-model = PPO("MlpPolicy", flappyenv, policy_kwargs=policy_kwargs, learning_rate=2e-4, verbose=1)
+model = PPO("MlpPolicy", flappyenv, policy_kwargs=policy_kwargs, learning_rate=3e-4, verbose=1)
 
 # Train the model
 model.learn(total_timesteps=500000)
