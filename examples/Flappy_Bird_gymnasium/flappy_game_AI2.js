@@ -224,9 +224,7 @@ class FlappyGame {
 
             const state = this.getCurrentState(this.player, this.obstacles);
             const action = await this.predictAction(state);
-            // let action = this.flap ? 1 : 0;
-            // this.flap = false;
-
+ 
             let collision = this.stepGame(action);
             this.renderFrame();
 
