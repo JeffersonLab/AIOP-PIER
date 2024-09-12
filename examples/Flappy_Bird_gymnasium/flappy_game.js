@@ -102,11 +102,12 @@ class FlappyGame {
     }
 
     showGameOver() {
+        score=this.score
         this.ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
         this.ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         this.ctx.fillStyle = WHITE;
         this.ctx.font = "30px Arial";
-        this.ctx.fillText("GaMe Over", SCREEN_WIDTH/3, SCREEN_HEIGHT / 2);
+        this.ctx.fillText("GaMe Over"+" "+score.toString(), SCREEN_WIDTH/3, SCREEN_HEIGHT / 2);
         this.ctx.font = "20px Arial";
         this.ctx.fillText("Press Enter to Restart", SCREEN_WIDTH/3 - 30, SCREEN_HEIGHT / 2 + 30);
     }
