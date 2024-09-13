@@ -3,6 +3,8 @@
 const canvas = document.getElementById("flappyCanvas");
 const ctx = canvas.getContext("2d");
 
+const player_token = aiplayerToken
+
 // Constants from the Python script
 const GRID_WIDTH = 256;
 const GRID_HEIGHT = 128;
@@ -172,6 +174,11 @@ class FlappyGame {
         this.ctx.fillText("Game Over", SCREEN_WIDTH/3, SCREEN_HEIGHT / 2);
         this.ctx.font = "20px Arial";
         this.ctx.fillText("Press Enter to Restart", SCREEN_WIDTH/3 - 30, SCREEN_HEIGHT / 2 + 30);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://epsciweb.jlab.org/msaiworkshop/AIOP-PIER/examples/Flappy_Bird_gymnasium/recordscore.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        //console.log("player_token="+player_token+"&score="+this.score+"&method=ai");
+        xhr.send("player_token="+player_token+"&score="+this.score+"&method=ai");
     }
 
     renderFrame() {
@@ -280,5 +287,3 @@ createFlappyGame().then((game) => {
         console.log("Game initialization failed!");
     }
 });
-
-
