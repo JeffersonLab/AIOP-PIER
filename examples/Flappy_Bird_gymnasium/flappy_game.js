@@ -136,6 +136,11 @@ class FlappyGame {
         this.ctx.fillStyle = WHITE;
         this.ctx.font = "20px Arial";
         this.ctx.fillText("Score: " + this.score, 10, 25);
+        if (this.score>10000)
+        {
+            this.gameOver = true;
+            //this.showGameOver()
+        }
     }
 
     stepGame(action) {
@@ -177,7 +182,7 @@ class FlappyGame {
             let collision = this.stepGame(action);
             this.renderFrame();
 
-            if (!collision) {
+            if (!collision && !this.gameOver) {
                 setTimeout(gameLoop, 1000 / FPS);
             } else {
                 this.gameOver = true;
