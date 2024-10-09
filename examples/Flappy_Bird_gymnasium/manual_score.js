@@ -1,7 +1,7 @@
 var player_token = playerToken
 
 manual_score=myScore
-console.log("manually entered score="+manual_score)
+console.log("manually entered score="+manual_score, "player_token="+player_token);
 if (manual_score != null)
 {
 var xhr = new XMLHttpRequest();
