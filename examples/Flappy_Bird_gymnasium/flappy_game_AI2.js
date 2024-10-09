@@ -3,7 +3,7 @@
 const canvas = document.getElementById("flappyCanvas");
 const ctx = canvas.getContext("2d");
 
-const player_token = aiplayerToken
+var player_token = aiplayerToken
 
 // Constants from the Python script
 const GRID_WIDTH = 256;
