@@ -1,4 +1,4 @@
-const player_token = playerToken
+var player_token = playerToken
 
 manual_score=myScore
 console.log("manually entered score="+manual_score)
