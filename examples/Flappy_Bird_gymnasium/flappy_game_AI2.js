@@ -28,6 +28,7 @@ const OBSTACLE_COLOR = GREEN;
 const OBSTACLE_SPEED = 3;
 FPS = 30;
 total_traintime=-1;
+netarch="";
 
 if (typeof reqfps !== 'undefined')
 {
@@ -37,6 +38,11 @@ if (typeof reqfps !== 'undefined')
 if (typeof total_time !== 'undefined')
 {
     total_traintime=total_time;
+}
+
+if (typeof net_arch !== 'undefined')
+{
+    netarch=net_arch;
 }
 
 // Player class
@@ -188,8 +194,8 @@ class FlappyGame {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "https://epsciweb.jlab.org/msaiworkshop/AIOP-PIER/examples/Flappy_Bird_gymnasium/recordscore.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        console.log("player_token="+player_token+"&score="+this.score+"&method=ai&traintime="+total_traintime);
-        xhr.send("player_token="+player_token+"&score="+this.score+"&method=ai&traintime="+total_traintime);
+        console.log("player_token="+player_token+"&score="+this.score+"&method=ai&traintime="+total_traintime+"&netarch="+netarch);
+        xhr.send("player_token="+player_token+"&score="+this.score+"&method=ai&traintime="+total_traintime+"&netarch="+netarch);
     }
 
     renderFrame() {
